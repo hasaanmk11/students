@@ -125,7 +125,6 @@ class MyHomePage extends StatelessWidget {
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    
                                     IconButton(
                                       icon: Icon(
                                         Icons.edit,
@@ -167,18 +166,24 @@ class MyHomePage extends StatelessWidget {
                         return AlertDialog(actions: [AddUser()]);
                       },
                     );
-                 
                   },
-                  icon: Icon(Icons.add, color: const Color.fromARGB(255, 52, 35, 35)),
+                  icon: Icon(
+                    Icons.add,
+                    color: const Color.fromARGB(255, 52, 35, 35),
+                  ),
                 ),
               ),
               Row(
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                        return GridPage();
-                      },));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return GridPage();
+                          },
+                        ),
+                      );
                     },
                     icon: Icon(Icons.grid_view_sharp, color: Colors.lightBlue),
                   ),
@@ -191,7 +196,6 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
 
 void _showEditDialog(BuildContext context, StudentModel student) {
   ValueNotifier image = ValueNotifier(String);

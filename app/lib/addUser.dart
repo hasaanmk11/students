@@ -21,7 +21,7 @@ class _AddUserState extends State<AddUser> {
     return AlertDialog(
       title: Text("Add Student"),
       content: Column(
-        mainAxisSize: MainAxisSize.min, // Prevent overflow
+        mainAxisSize: MainAxisSize.min, 
         children: [
           TextFormField(
             controller: nameController,

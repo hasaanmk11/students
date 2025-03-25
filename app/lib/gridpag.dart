@@ -10,54 +10,72 @@ class GridPage extends StatelessWidget {
   Widget build(BuildContext context) {
     getAllsudents();
     return Scaffold(
-      appBar: AppBar(title: Text("Grid View")),
-      body: ValueListenableBuilder(
-        valueListenable: StudentListener,
-        builder: (context, value, child) {
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.file(
-                      File(value[index].images),
-
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                    Row(
+      appBar: AppBar(
+        title: const Text(
+          "Students",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ValueListenableBuilder(
+          valueListenable: StudentListener,
+          builder: (context, value, child) {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Name: ${value[index].name}",
-                          style: TextStyle(color: Colors.white),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child:
+                              value[index].images.isNotEmpty
+                                  ? Image.file(
+                                    File(value[index].images),
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                  )
+                                  : CircleAvatar(child: Icon(Icons.person)),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(height: 8),
+                        Text(
+                          value[index].name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Text(
                           "Age: ${value[index].age}",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey.shade700,
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
