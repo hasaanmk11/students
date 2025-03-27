@@ -4,6 +4,7 @@ import 'package:app/addUser.dart';
 import 'package:app/functions/db_functions.dart';
 import 'package:app/gridpag.dart';
 import 'package:app/model/student_model.dart';
+import 'package:app/pageDlt.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -87,6 +88,15 @@ class MyHomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: ListTile(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) =>
+                                              UserDtls(data: value[index]),
+                                    ),
+                                  );
+                                },
                                 subtitle: Text(value[index].age),
                                 leading:
                                     value[index].images.isNotEmpty
@@ -223,11 +233,13 @@ void _showEditDialog(BuildContext context, StudentModel student) {
               decoration: InputDecoration(labelText: "Enter Age"),
               keyboardType: TextInputType.number,
             ),
-            Container(
-              width: 50,
-              height: 50,
-              child: Image.file(File(student.images)),
-            ),
+            (student.images.isEmpty)
+                ? Icon(Icons.person)
+                : Container(
+                  width: 50,
+                  height: 50,
+                  child: Image.file(File(student.images)),
+                ),
             TextButton(
               onPressed: () async {
                 FilePickerResult? result = await FilePicker.platform.pickFiles(
